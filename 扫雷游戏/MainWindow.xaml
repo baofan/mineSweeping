@@ -1,0 +1,123 @@
+﻿<Window x:Class="扫雷游戏.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr=namspace:扫雷游戏"
+        Title="扫雷" Height="580" Width="550" ResizeMode="CanMinimize" Icon="Images/mine.ico">
+
+    <Window.Resources>
+        <RoutedUICommand x:Key="NewGame" Text="新游戏"/>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+N" Command="{StaticResource NewGame}"/>
+    </Window.InputBindings>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource NewGame}" Executed="New_Executed"/>
+    </Window.CommandBindings>
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#FFD4DEE7" Offset="0.193"/>
+                <GradientStop Color="#FF8E9AB2" Offset="0.487"/>
+                <GradientStop Color="#FFD4DEE7" Offset="0.92"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--菜单区-->
+        <DockPanel  Grid.Row="0"  Grid.ColumnSpan="3" LastChildFill="False">
+            <Menu x:Name="mnu"  DockPanel.Dock="Top">
+                <MenuItem Header="游戏(_G)">
+                    <MenuItem Header="新游戏(_N)" x:Name="mnuNew" Click="MnuNewGame_Click" Command="{StaticResource NewGame}" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="退出(_X)" Click="MenuExit_Click"/>
+                </MenuItem>
+                <MenuItem Header="关于(_H)">
+                    <MenuItem Header="关于游戏" Click="MnuAbout_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+
+        <!--游戏主面板区-->
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1" Grid.Column="1" Margin="4">
+            <Grid x:Name="gridBoard">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+        </Border>
+        <!--下方的显示区-->
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--放置时钟的图片-->
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="1" Source="Images/cicle.png"/>
+                <Image Grid.Column="1" Source="Images/clock.png" Margin="8"/>
+            </Grid>
+
+            <!--放置时间文本-->
+            <Border Grid.Column="1"  Margin="0,8,0,0" BorderThickness="2" BorderBrush="Black">
+                <Label x:Name="lblTime" Content="0" Background="#FF3B66B4"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="30" Padding="5,-5,5,5" Foreground="#E5FFFFFF"/>
+            </Border>
+
+
+            <!--放置标记的地雷数的文本-->
+            <Border  Grid.Column="3" Margin="0,8,0,0" BorderThickness="2" BorderBrush="Black">
+                <Label x:Name="lblLeftMines" Content="0" Background="#FF3B66B4" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="30" Padding="5,-5,5,5" Foreground="#E5FFFFFF"/>
+            </Border>
+
+            <!--放置地雷的图片-->
+            <Grid Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="Images/cicle.png"/>
+                <Image Grid.Column="0" Source="Images/mine.png" Margin="8"/>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</Window>
